@@ -1,0 +1,34 @@
+
+- Each `weekN_*` folder contains:
+  - Its own `README.md` with detailed goals, steps, and resources
+  - Source code, notes, and relevant materials
+
+---
+
+##  Milestone Roadmap
+
+| Week         | Focus Area               | Outcome                                                |
+|--------------|---------------------------|--------------------------------------------------------|
+| **Week 1**   | RISC-V Assembly Basics    | Write and run simple RISC-V assembly programs          |
+| **Week 2**   | Tiny Compiler Backend     | Implement a minimal expression compiler targeting RISC-V |
+| **Week 5**   | GPU and IR Exploration    | Learn GPU concepts and IR modeling for parallelism     |
+| **Week 8**   | MLIR Toy Tutorial         | Build an MLIR-based compiler with dialects and lowering |
+| **Week 12**  | Capstone Project          | Create an AI-focused compiler project (DSL or optimizer) |
+
+---
+
+##  Why Follow This Roadmap?
+
+- **Incremental Learning**: Each project builds on the previous, reinforcing your skills methodically.
+- **AI-Relevant Applications**: You'll work with tools used in real-world ML compilers like TVM, XLA, and MLIR.
+- **Tangible Portfolio Pieces**: Every milestone yields a tangible artifact for showcasing your progress.
+- **Flexible & Expandable**: Adapt the pacing and depth based on preference and focus areas.
+
+---
+
+## ⏬ Getting Started
+
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+
