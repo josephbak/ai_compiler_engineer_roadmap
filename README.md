@@ -5,10 +5,11 @@ A structured, project-based learning journey that builds your skills from founda
 ---
 
 ##  Project Structure
-
+```
 ai_compiler_engineer_roadmap/
 ├── week1_riscv_basics/ # RISC-V fundamentals & assembly
 ├── week2_tiny_compiler/ # Mini RISC-V compiler backend
 ├── week5_gpu_ir/ # GPU & parallel IR exploration
 ├── week8_mlir_toy/ # MLIR Toy Tutorial implementation
 └── week12_capstone/ # Final AI compiler project
+```
