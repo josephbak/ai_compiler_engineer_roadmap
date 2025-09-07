@@ -1,0 +1,91 @@
+week: 1
+name: riscv_basics
+root: week1_riscv_basics
+simulator: venus
+
+directories:
+  src: src
+  notes: notes
+
+goals:
+  - Write and run small RV32I programs in Venus
+  - Practice loops, arithmetic, functions (leaf vs non-leaf), and memory I/O
+  - Observe register conventions (a*, t*, s*, ra, sp) and basic stack usage
+
+ecalls:  # Venus conventions
+  print_int:    { a0: 1,  args: ["a1=value"] }
+  print_string: { a0: 4,  args: ["a1=addr"] }
+  read_int:     { a0: 5,  ret: "a0=value" }
+  exit:         { a0: 10 }
+
+files:
+  - name: hello.s
+    path: src/hello.s
+    purpose: "Minimal Hello World using Venus ecalls (print string, exit)."
+    status: "done"
+
+  - name: loop.s
+    path: src/loop.s
+    purpose: "Sum 1..10 with a counted loop; prints 55."
+    focus: ["addi", "add", "blt", "branch control"]
+    status: "done"
+
+  - name: mult_add.s
+    path: src/mult_add.s
+    purpose: "Multiply via repeated addition (e.g., 6*7). Uses t-registers as counter/accumulator."
+    focus: ["addi", "add", "bnez", "loop mechanics"]
+    status: "done"
+
+  - name: caller_nonleaf
+    path: src/caller_nonleaf.s
+    purpose: "Variant non-leaf driver calling mul_times_add → mul_u32_leaf; demonstrates preserving ra across calls."
+    focus: ["callee-saved regs", "stack alignment", "call tree"]
+    status: "done"
+
+  - name: caller_leaf.s
+    path: src/caller_leaf.s
+    purpose: "Non-leaf example that computes a0*a1 + a2 via helper mul_u32_leaf; prints result."
+    focus: ["jal/jr", "stack frame (prologue/epilogue)", "save/restore ra,s0"]
+    status: "done"
+
+  - name: mem_io.s
+    path: src/mem_io.s
+    purpose: "Store two words into an array and load them back; prints both."
+    focus: ["sw", "lw", "addressing with base+offset", "data section"]
+    status: "draft"
+
+exercises:
+  - title: "Loop tracing"
+    file: src/loop.s
+    observe:
+      - "t0 increments each iteration; t2 accumulates"
+      - "branch taken while t0 < 11; falls through at 11"
+
+  - title: "Repeated-add multiply"
+    file: src/mult_add.s
+    observe:
+      - "t1 counts down to zero; t2 grows by t0 each time"
+      - "replace operands and confirm results"
+
+  - title: "Leaf vs Non-leaf"
+    files: [src/caller_leaf2.s, src/caller_nonleaf.s]
+    observe:
+      - "prologue saves ra/s0; epilogue restores"
+      - "ra values before/after calling mul_u32_leaf"
+      - "sp returns to original value after function returns"
+
+  - title: "Memory round-trip"
+    file: src/mem_io.s
+    observe:
+      - "array base via la; word offsets 0/4"
+      - "values printed match stored inputs"
+
+how_to_run:
+  - "Open file in Venus → Simulator → Assemble & Simulate from Editor."
+  - "Use Run or Step; watch registers/memory panes."
+  - "Print: set a0=1, value in a1 → ecall. Exit: a0=10 → ecall."
+
+notes_todo:
+  - "Document register roles (a0–a7 args/return, t* temporaries, s* callee-saved, ra, sp)."
+  - "Sketch call trees for non-leaf examples."
+  - "Write a short reflection on stack frames and why ra must be saved."
